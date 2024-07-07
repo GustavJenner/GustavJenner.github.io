@@ -1,0 +1,7 @@
+:root {
+    --color: lime;
+    --background: #999;
+    --size: 1.4;
+    --glow: 1;
+    --animation: terminal-blink;
+}
