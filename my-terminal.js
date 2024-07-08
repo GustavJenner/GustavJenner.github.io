@@ -1,9 +1,20 @@
+
 const figletFont = 'Swamp Land';
 const greetingsText = 'G-Terminal'
 const lowerText = '\nWelcome to my portfolio website, to start write "gt --help" to see additional commands\n';
 const lowerTextColor = '[[b;DimGrey;black]'
 const greetingsColor = '[[b;lime;black]';
-
+const imageFile = '[[b;lime;black]'
+function print_dirs(dirs) {
+    term.echo(dirs.map(dir => {
+        return `[[b;blue;black]${dir}`;
+    }).join('\n'));
+}
+function print_files(){
+    term.echo(currentDirectory.map(dir => {
+        return dir.name+"."+dir.type;
+    }).join('\n'));
+}
 const commands = {
    help() {
        term.echo(`List of available commands: `);
@@ -14,40 +25,43 @@ const commands = {
    echo(...args) {
     term.echo(args.join(' '));
     },
-    ls(){
-        if(Array.isArray((currentDir))){
-            for(const file of currentDir){
-                term.echo(file)
-        }
-        
-
+    ls(dir = null){
+        if(Array.isArray(currentDirectory)){
+            print_files();
         }else{
-
-            for(let [key,value] of Object.entries(currentDir)){
-                term.echo(key);
-            }
+            print_dirs(Object.keys(currentDirectory));
         }
 
-        
-        
     },
 
-    cd(dir){
-        if(path == root){
-            path = dir
+    cd(dir = null) {
+        if(dir == ".."){
+            cwd = root
+            currentDirectory = directories;
+        }
+        else if(cwd == root){
+            cwd = dir
+            currentDirectory = currentDirectory[dir];
 
         }else{
-        path = path.concat('/',dir)
+        cwd = cwd.concat('/',dir)
+        currentDirectory = currentDirectory[dir];
 
         }
-        currentDir = currentDir[dir]
-
         
-    }
+    },
+    cat(file){
+        currentDirectory.map(dir => {
+            if(dir.name === file){
+                term.echo(dir.content)
+            }
+            
+        });
+    },
     
 };
 const directories = {
-    education:[$(`<red>test</red>`)]
+    education:['[[b;red;white]hello world]']
 
     ,
     projects:{}
@@ -65,7 +79,7 @@ const directories = {
 
 
     },
-    whoami:['https://jcu.bi/wayne'
+    whoami:[new FileObject("whoami","god","txt"), new FileObject("potrait",'[[@;;;;test.png]]',"img")
 
 
     ],
@@ -74,16 +88,13 @@ const directories = {
     ]
 
 }
-const dirs = Object.keys(directories);
 const command_list = ['clear'].concat(Object.keys(commands));
 const root = '~';
-let path = root;
-const user = 'Guest';
-const server = 'gjserver.com';
-let currentDir = directories;
-
-
-
+const dirs = Object.keys(directories);
+let cwd = root;
+const user = 'guest';
+const server = 'gj.com';
+let currentDirectory = directories;
 figlet.defaults({ fontPath: 'https://unpkg.com/figlet/fonts/' });
 figlet.preloadFonts(['Standard', figletFont], ready);
 
@@ -92,10 +103,12 @@ figlet.preloadFonts(['Standard', figletFont], ready);
 const term = $('body').terminal(commands,{
     greetings: false,
     checkArity:false,
-    prompt
+    completion:true,
+    prompt,
+    
     
 }, { 
-    
+   
 
     
     });
@@ -108,7 +121,7 @@ function ready() {
  }
  
  function prompt(){
-    return `${user}@${server}:${path}$ `;
+    return `${user}@${server}:${cwd}$ `;
 }
 function render(term, text, font) {
     const cols = term.cols();
@@ -120,3 +133,12 @@ function render(term, text, font) {
     });
     return `${greetingsColor}${greetings}]`
 }
+term.on('click', '.command', function() {
+    const command = $(this).text();
+    term.exec(command, { typing: true, delay: 50 });
+ });
+ 
+ term.on('click', '.directory', function() {
+     const dir = $(this).text();
+     term.exec(`cd ~/${dir}`, { typing: true, delay: 50 });
+ });
