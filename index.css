@@ -5,3 +5,13 @@
     --glow: 1;
     --animation: terminal-blink;
 }
+
+.clickable-dir {
+    color: #4a9eff;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.clickable-dir:hover {
+    color: #7ab8ff;
+}

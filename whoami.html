@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Who Am I</title>
+    <style>
+        body {
+            background-color: black;
+            color: lime;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            line-height: 1.6;
+        }
+        .terminal-container {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 2rem;
+            border: 1px solid lime;
+            border-radius: 5px;
+            width: 80%;
+            max-width: 800px;
+        }
+        h1 {
+            color: lime;
+            border-bottom: 1px solid lime;
+            padding-bottom: 10px;
+            width: 100%;
+            text-align: center;
+        }
+        .back-button {
+            background-color: black;
+            color: lime;
+            border: 1px solid lime;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            transition: all 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: lime;
+            color: black;
+        }
+        .cursor {
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal-container">
+        <h1>whoami<span class="cursor">_</span></h1>
+        <p>Name: Gustav Jenner</p>
+        <p>Born:2001</p>
+        <p>Location: Sweden</p>
+        <p>Pronouns:He/Him</p>
+        <p>Interests: Programming, Gaming, Cooking, Weightlifting</p>
+        <p>Bio: I am a currently a student at the Royal Institute of Technology in Stockholm, Sweden. studying for a masters in cybersecurity with a bachelor in information technology.</p>
+        <button class="back-button" onclick="window.history.back()">cd ..</button>
+    </div>
+</body>
+</html> 
