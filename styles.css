@@ -1,0 +1,85 @@
+/* Terminal Theme Styles */
+body {
+    background-color: black;
+    color: lime;
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.terminal-container {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 2rem;
+    border: 1px solid lime;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 800px;
+}
+
+h1 {
+    color: lime;
+    border-bottom: 1px solid lime;
+    padding-bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.back-button {
+    background-color: black;
+    color: lime;
+    border: 1px solid lime;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: lime;
+    color: black;
+}
+
+.cursor {
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Content Item Styles */
+.content-item {
+    margin-bottom: 20px;
+    border-left: 1px solid lime;
+    padding-left: 15px;
+}
+
+/* Navigation Styles */
+.nav-container {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid lime;
+    width: 100%;
+    text-align: center;
+}
+
+.nav-link {
+    color: lime;
+    text-decoration: none;
+    margin: 0 10px;
+    padding: 5px 10px;
+    border: 1px solid lime;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: lime;
+    color: black;
+} 
